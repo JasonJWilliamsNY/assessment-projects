@@ -102,7 +102,8 @@ Recommended <- round(prop.table(table(data$Recommended))* 100)
 Recommended
 
 # Function that makes a table of counts and percentages
-tally_and_perc <- function(df, colname, na.rm = FALSE){
+# question_n is set by default to the number of respondents in the survey - 476. This value may have to be set by question. 
+tally_and_perc <- function(df, colname, na.rm = FALSE, question_n = 476){
   quo_colname <- enquo(colname)
 
   df %>% 
@@ -111,7 +112,7 @@ tally_and_perc <- function(df, colname, na.rm = FALSE){
     filter(if_else(rep(na.rm, nrow(.)),
                   !is.na(!!quo_colname),
                   as.logical(rep(1, nrow(.))))) %>% 
-    mutate(`%` = round(n / sum(n) * 100, 1)) 
+    mutate(`%` = round(n / question_n * 100, 1)) 
 }
 ```
 # Highlights
@@ -773,6 +774,7 @@ ggsave("figures/workshop_impact_heatmap.png")
 # Code for behaviors adopted
 # Responses are in columns 'Behaviors-Adopted' through 'Column32'
 # Use 'gather' to go from wide to long format
+
 Behaviors <- 
 data %>%
   select(`Behaviors-Adopted`:Column32) %>% 
