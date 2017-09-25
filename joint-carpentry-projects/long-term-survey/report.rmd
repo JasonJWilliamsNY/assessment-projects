@@ -769,7 +769,7 @@ ggsave("figures/workshop_impact_heatmap.png")
 ```
 
 ### Behaviors Respondents Adopted
-```{r include = FALSE}
+```{r include=FALSE}
 # Code for behaviors adopted
 # Responses are in columns 'Behaviors-Adopted' through 'Column32'
 # Use 'gather' to go from wide to long format
